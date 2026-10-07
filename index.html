@@ -5,31 +5,183 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Manager de transition augmenté par l’IA</title>
 <style>
-:root{--bg:#07111f;--panel:#0d1b2b;--text:#f6f8fb;--muted:#a9b7c7;--accent:#35c4c8;--accent2:#7bdcb5;--line:rgba(255,255,255,.09)}
-*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);overflow:hidden}button{font:inherit}.app{height:100vh;display:grid;grid-template-columns:260px 1fr}.sidebar{border-right:1px solid var(--line);padding:24px 18px;background:linear-gradient(180deg,#081421,#091827);display:flex;flex-direction:column;gap:18px}.brand{font-weight:800;font-size:14px;line-height:1.25}.brand span{color:var(--accent)}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}.nav{display:flex;flex-direction:column;gap:8px;overflow:auto}.nav button{all:unset;cursor:pointer;padding:10px 12px;border-radius:12px;color:var(--muted);font-size:13px;border:1px solid transparent}.nav button:hover{background:rgba(255,255,255,.04);color:var(--text)}.nav button.active{background:rgba(53,196,200,.12);border-color:rgba(53,196,200,.24);color:var(--text)}.sidefoot{margin-top:auto;color:var(--muted);font-size:11px;line-height:1.5}.stage{position:relative;overflow:hidden}.progress{position:absolute;left:0;top:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;z-index:5;transition:.35s}.slide{position:absolute;inset:0;padding:54px 6vw 64px;opacity:0;transform:translateX(22px);pointer-events:none;transition:.35s;display:flex;flex-direction:column;justify-content:center}.slide.active{opacity:1;transform:none;pointer-events:auto}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-weight:700;color:var(--accent);font-size:12px;margin-bottom:18px}h1,h2,h3,p{margin:0}h1{font-size:clamp(38px,5vw,76px);line-height:.98;max-width:1050px;letter-spacing:-.045em}h2{font-size:clamp(30px,3.6vw,54px);line-height:1.02;max-width:1000px;letter-spacing:-.035em}h3{font-size:18px;line-height:1.2}.lead{font-size:clamp(18px,2vw,26px);line-height:1.45;color:#d7e2eb;max-width:920px;margin-top:24px}.accent{color:var(--accent)}.grid{display:grid;gap:18px;margin-top:30px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:20px;padding:22px}.card p{color:var(--muted);line-height:1.5;font-size:14px;margin-top:8px}.big-number{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-.04em}.quote{margin-top:28px;padding:22px 24px;border-left:4px solid var(--accent);background:rgba(53,196,200,.07);border-radius:0 16px 16px 0;font-size:22px;line-height:1.45;max-width:920px}.process{display:flex;gap:10px;align-items:stretch;margin-top:30px;flex-wrap:wrap}.step{flex:1 1 150px;min-width:150px;padding:18px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}.step b{display:block;color:var(--accent);font-size:14px;margin-bottom:8px}.step span{color:#dce6ef;font-size:14px}.arrow{align-self:center;color:var(--muted);font-size:22px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.tabs button{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);padding:9px 12px;border-radius:999px;cursor:pointer}.tabs button.active{color:#061018;background:var(--accent);border-color:var(--accent)}.tabpanel{margin-top:20px}.usecase-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.usecase{padding:15px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:14px;color:#dbe5ee}.metric-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}.metric{padding:18px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}.metric strong{display:block;font-size:24px;color:var(--accent)}.metric span{display:block;color:var(--muted);font-size:12px;margin-top:5px}.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:30px}.timeline .card{position:relative}.timeline .card:before{content:"";position:absolute;top:-1px;left:20px;right:20px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px}.controls{position:absolute;right:22px;bottom:18px;display:flex;gap:10px;z-index:6}.controls button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(7,17,31,.78);color:var(--text);cursor:pointer}.count{position:absolute;left:22px;bottom:24px;color:var(--muted);font-size:12px;z-index:6}.note{font-size:12px;color:var(--muted);margin-top:16px}@media(max-width:980px){.app{grid-template-columns:1fr}.sidebar{display:none}.slide{padding:46px 26px 72px}.cols3,.cols4,.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.cols2,.cols3,.cols4,.timeline,.metric-row,.usecase-list{grid-template-columns:1fr}h1{font-size:44px}.slide{overflow:auto;justify-content:flex-start;padding-top:56px}}
+:root{--bg:#07111f;--panel:#0d1b2b;--text:#f6f8fb;--muted:#a9b7c7;--accent:#35c4c8;--accent2:#7bdcb5;--line:rgba(255,255,255,.09);--navh:72px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}a{color:inherit;text-decoration:none}button{font:inherit}.topbar{position:sticky;top:0;z-index:50;height:var(--navh);display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(7,17,31,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.brand{font-weight:800;font-size:14px;line-height:1.2}.brand span{color:var(--accent)}.nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.nav a{padding:9px 11px;border-radius:10px;color:var(--muted);font-size:13px}.nav a:hover,.nav a.active{color:var(--text);background:rgba(53,196,200,.12)}.menu-btn{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.04);color:var(--text);cursor:pointer}.hero,.section{max-width:1180px;margin:0 auto;padding:88px 28px}.hero{min-height:calc(100vh - var(--navh));display:flex;flex-direction:column;justify-content:center}.section{border-top:1px solid var(--line)}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-weight:700;color:var(--accent);font-size:12px;margin-bottom:18px}h1,h2,h3,p{margin:0}h1{font-size:clamp(42px,7vw,88px);line-height:.95;max-width:1050px;letter-spacing:-.05em}h2{font-size:clamp(32px,4.5vw,58px);line-height:1.02;max-width:1000px;letter-spacing:-.04em}h3{font-size:18px;line-height:1.2}.lead{font-size:clamp(18px,2.1vw,27px);line-height:1.45;color:#d7e2eb;max-width:920px;margin-top:24px}.accent{color:var(--accent)}.grid{display:grid;gap:18px;margin-top:30px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:20px;padding:22px}.card p{color:var(--muted);line-height:1.55;font-size:14px;margin-top:8px}.big-number{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-.04em}.quote{margin-top:28px;padding:22px 24px;border-left:4px solid var(--accent);background:rgba(53,196,200,.07);border-radius:0 16px 16px 0;font-size:21px;line-height:1.45;max-width:920px}.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:30px}.timeline .card{position:relative}.timeline .card:before{content:"";position:absolute;top:-1px;left:20px;right:20px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px}.process{display:flex;gap:10px;align-items:stretch;margin-top:30px;flex-wrap:wrap}.step{flex:1 1 160px;min-width:150px;padding:18px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}.step b{display:block;color:var(--accent);font-size:14px;margin-bottom:8px}.step span{color:#dce6ef;font-size:14px}.arrow{align-self:center;color:var(--muted);font-size:22px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.tabs button{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);padding:9px 12px;border-radius:999px;cursor:pointer}.tabs button.active{color:#061018;background:var(--accent);border-color:var(--accent)}.tabpanel{margin-top:20px}.usecase-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.usecase{padding:15px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:14px;color:#dbe5ee}.metric-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}.metric{padding:18px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}.metric strong{display:block;font-size:24px;color:var(--accent)}.metric span{display:block;color:var(--muted);font-size:12px;margin-top:5px}.note{font-size:12px;color:var(--muted);margin-top:16px}.backtop{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(7,17,31,.9);color:var(--text);display:grid;place-items:center;z-index:40}.footer{padding:36px 28px 60px;text-align:center;color:var(--muted);font-size:13px}
+@media(max-width:1020px){.nav{position:absolute;top:var(--navh);left:0;right:0;display:none;flex-direction:column;align-items:stretch;padding:12px 18px 18px;background:#081421;border-bottom:1px solid var(--line)}.nav.open{display:flex}.nav a{padding:12px 14px}.menu-btn{display:block}.topbar{padding:0 18px}.hero,.section{padding:72px 22px}.cols3,.cols4,.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){:root{--navh:64px}.brand{font-size:13px}.hero,.section{padding:56px 18px}.hero{min-height:auto;padding-top:72px;padding-bottom:72px}.cols2,.cols3,.cols4,.timeline,.metric-row,.usecase-list{grid-template-columns:1fr}.process{display:grid;grid-template-columns:1fr}.arrow{display:none}h1{font-size:46px}.quote{font-size:18px}.tabs{flex-direction:column}.tabs button{width:100%;text-align:left}.card{padding:18px}}
 </style>
 </head>
 <body>
-<div class="app">
-<aside class="sidebar"><div><div class="kicker">Formation</div><div class="brand">Manager de transition<br><span>augmenté par l’IA</span></div></div><div class="nav" id="nav"></div><div class="sidefoot">Navigation clavier : ← →<br>Cliquez sur un thème pour accéder à la slide.</div></aside>
-<main class="stage"><div class="progress" id="progress"></div>
-<section class="slide active" data-title="Introduction"><div class="eyebrow">Formation • 2 jours</div><h1>Manager de transition <span class="accent">augmenté par l’IA</span></h1><p class="lead">Utiliser l’IA pour diagnostiquer plus vite, identifier de nouveaux leviers de performance et construire des plans de transformation à ROI mesurable.</p><div class="quote">L’objectif n’est pas de devenir expert technique de l’IA. Il est de savoir <b>où, pourquoi et comment l’utiliser</b> pour résoudre une problématique business.</div></section>
-<section class="slide" data-title="Pourquoi maintenant ?"><div class="eyebrow">Le contexte</div><h2>Les entreprises veulent intégrer l’IA… <span class="accent">sans toujours savoir par où commencer.</span></h2><div class="grid cols3"><div class="card"><div class="big-number">01</div><h3>Des enjeux immédiats</h3><p>Crise, restructuration, transformation, performance, remplacement temporaire d’un dirigeant.</p></div><div class="card"><div class="big-number">02</div><h3>Des managers expérimentés</h3><p>Une forte expertise métier, une capacité d’adaptation élevée et une obligation de résultat rapide.</p></div><div class="card"><div class="big-number">03</div><h3>Une nouvelle compétence</h3><p>Repérer les processus à augmenter, automatiser ou transformer grâce à l’IA.</p></div></div></section>
-<section class="slide" data-title="La promesse"><div class="eyebrow">La promesse</div><h2>Passer de l’usage ponctuel de l’IA à une <span class="accent">méthode de transformation.</span></h2><div class="grid cols4"><div class="card"><h3>Se renforcer</h3><p>Utiliser l’IA comme copilote dans sa propre mission.</p></div><div class="card"><h3>Diagnostiquer</h3><p>Identifier les tâches, processus et décisions à optimiser.</p></div><div class="card"><h3>Prioriser</h3><p>Évaluer impact, faisabilité, risques et ROI.</p></div><div class="card"><h3>Convaincre</h3><p>Construire une roadmap et la défendre devant un dirigeant ou un CODIR.</p></div></div></section>
-<section class="slide" data-title="Pour qui ?"><div class="eyebrow">Public</div><h2>Une formation conçue pour la <span class="accent">diversité des fonctions.</span></h2><div class="grid cols3"><div class="card"><h3>Direction générale / COO</h3><p>Pilotage, restructuration, transformation, crise, performance.</p></div><div class="card"><h3>Finance / DAF</h3><p>Reporting, cash, contrôle, ERP, clôture, restructuration financière.</p></div><div class="card"><h3>Ressources Humaines</h3><p>Transformation RH, réorganisation, compétences, relations sociales.</p></div><div class="card"><h3>Industrie / Supply Chain</h3><p>Productivité, qualité, stocks, flux, achats, redressement de site.</p></div><div class="card"><h3>DSI / Transformation</h3><p>SI, data, IA, cybersécurité, ERP, organisation digitale.</p></div><div class="card"><h3>Commercial / Marketing</h3><p>Relance commerciale, acquisition, conversion, omnicanal, offre.</p></div></div></section>
-<section class="slide" data-title="Parcours pédagogique"><div class="eyebrow">Programme</div><h2>Un parcours en <span class="accent">8 modules</span>, du socle commun à la mise en situation.</h2><div class="timeline"><div class="card"><h3>1. Comprendre</h3><p>IA générative, prédictive, RAG, automatisation, agents.</p></div><div class="card"><h3>2. S’augmenter</h3><p>Utiliser l’IA comme copilote de mission.</p></div><div class="card"><h3>3. Diagnostiquer</h3><p>Repérer les opportunités dans les processus.</p></div><div class="card"><h3>4. Appliquer</h3><p>Cas d’usage par métier.</p></div><div class="card"><h3>5. Automatiser</h3><p>Assistant, workflow, agent et multi-agents.</p></div><div class="card"><h3>6. Valoriser</h3><p>Business case, gains, ROI.</p></div><div class="card"><h3>7. Sécuriser</h3><p>Risques, gouvernance, adoption.</p></div><div class="card"><h3>8. Convaincre</h3><p>Challenge final et roadmap 30/60/90 jours.</p></div></div></section>
-<section class="slide" data-title="La méthode D.I.A.G. IA"><div class="eyebrow">Méthode réutilisable</div><h2>Transformer un problème métier en <span class="accent">opportunité IA.</span></h2><div class="process"><div class="step"><b>D — Détecter</b><span>Tâches répétitives, lentes, coûteuses ou sources de friction.</span></div><div class="arrow">→</div><div class="step"><b>I — Identifier</b><span>Données, documents, décisions, interactions et systèmes concernés.</span></div><div class="arrow">→</div><div class="step"><b>A — Analyser</b><span>Potentiel d’automatisation, gains, risques et faisabilité.</span></div><div class="arrow">→</div><div class="step"><b>G — Générer</b><span>Roadmap, priorisation et plan d’action.</span></div></div><p class="note">Une grille de diagnostic réutilisable dans chaque mission, quel que soit le secteur.</p></section>
-<section class="slide" data-title="Cas d’usage par métier"><div class="eyebrow">Cas d’usage</div><h2>Explorer l’IA à travers <span class="accent">son propre métier.</span></h2><div class="tabs" id="tabs"></div><div class="tabpanel card" id="tabpanel"></div></section>
-<section class="slide" data-title="Du copilote à l’agent IA"><div class="eyebrow">Niveaux d’automatisation</div><h2>Choisir le bon niveau de solution : <span class="accent">ni trop peu, ni trop complexe.</span></h2><div class="process"><div class="step"><b>1. Assistant IA</b><span>Répond à une demande.</span></div><div class="step"><b>2. Copilote métier</b><span>Travaille avec le contexte métier.</span></div><div class="step"><b>3. Workflow</b><span>Exécute plusieurs tâches selon des règles.</span></div><div class="step"><b>4. Agent IA</b><span>Poursuit un objectif et utilise des outils.</span></div><div class="step"><b>5. Multi-agents</b><span>Plusieurs agents gèrent un processus complet.</span></div></div></section>
-<section class="slide" data-title="Business case & ROI"><div class="eyebrow">Créer de la valeur</div><h2>Transformer une idée IA en <span class="accent">décision d’investissement.</span></h2><div class="process"><div class="step"><b>Coût actuel</b><span>Temps, ETP, erreurs, délais, volumes.</span></div><div class="arrow">→</div><div class="step"><b>Potentiel</b><span>Automatisation, capacité, qualité, vitesse.</span></div><div class="arrow">→</div><div class="step"><b>Investissement</b><span>Outils, intégration, conduite du changement.</span></div><div class="arrow">→</div><div class="step"><b>Impact</b><span>Économies, chiffre d’affaires, ROI, payback.</span></div></div><div class="metric-row"><div class="metric"><strong>Temps</strong><span>Réduction des tâches à faible valeur</span></div><div class="metric"><strong>Capacité</strong><span>Plus d’activité avec les mêmes ressources</span></div><div class="metric"><strong>Qualité</strong><span>Moins d’erreurs et plus de fiabilité</span></div><div class="metric"><strong>Business</strong><span>Plus de ventes, de marge ou de réactivité</span></div></div></section>
-<section class="slide" data-title="Risques & gouvernance"><div class="eyebrow">Sécuriser</div><h2>Automatiser lorsque cela crée de la valeur. <span class="accent">Garder l’humain lorsque le risque l’exige.</span></h2><div class="grid cols4"><div class="card"><h3>Données</h3><p>Confidentialité, RGPD, données sensibles, droits d’accès.</p></div><div class="card"><h3>Fiabilité</h3><p>Hallucinations, contrôle humain, traçabilité, biais.</p></div><div class="card"><h3>Sécurité</h3><p>Cybersécurité, dépendance fournisseur, gouvernance.</p></div><div class="card"><h3>Adoption</h3><p>Conduite du changement, rôle des équipes, appropriation.</p></div></div></section>
-<section class="slide" data-title="Challenge 90 jours"><div class="eyebrow">Mise en situation</div><h2><span class="accent">“Vous arrivez lundi.”</span><br>Le dirigeant vous donne 90 jours pour améliorer la performance.</h2><div class="grid cols3"><div class="card"><h3>Diagnostiquer</h3><p>Comprendre la situation, les problèmes et les irritants majeurs.</p></div><div class="card"><h3>Prioriser</h3><p>Sélectionner les cas d’usage IA à fort impact et faisables rapidement.</p></div><div class="card"><h3>Convaincre</h3><p>Présenter une roadmap 30/60/90 jours avec gains, risques et ROI.</p></div></div><div class="quote">Restitution finale : 5 minutes devant un “CODIR” pour défendre la recommandation.</div></section>
-<section class="slide" data-title="Pédagogie & livrables"><div class="eyebrow">Une formation immédiatement applicable</div><h2>40 % de socle commun. <span class="accent">60 % d’application métier.</span></h2><div class="grid cols2"><div class="card"><h3>Méthode pédagogique</h3><p>Démonstrations, cas réels, ateliers pratiques, travaux individuels et en groupe, business cases et simulations de présentation.</p></div><div class="card"><h3>Livrables participants</h3><p>Grille de diagnostic IA, méthode D.I.A.G., bibliothèque de cas d’usage, matrice de priorisation, trame ROI, checklist risques, roadmap 30/60/90 jours et modèles de prompts.</p></div></div><div class="quote"><b>Diagnostiquer plus vite. Transformer mieux. Créer davantage de valeur.</b></div></section>
-<div class="count" id="count"></div><div class="controls"><button id="prev">←</button><button id="next">→</button></div></main></div>
+<header class="topbar">
+  <a class="brand" href="#top">Manager de transition <span>augmenté par l’IA</span></a>
+  <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  <nav class="nav" id="nav">
+    <a href="#contexte">Contexte</a><a href="#promesse">Promesse</a><a href="#public">Public</a><a href="#programme">Programme</a><a href="#methode">Méthode</a><a href="#cas">Cas d’usage</a><a href="#agents">Agents IA</a><a href="#roi">ROI</a><a href="#gouvernance">Gouvernance</a><a href="#challenge">Challenge</a><a href="#pedagogie">Pédagogie</a>
+  </nav>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="eyebrow">Formation • 2 jours</div>
+  <h1>Manager de transition <span class="accent">augmenté par l’IA</span></h1>
+  <p class="lead">Utiliser l’IA pour diagnostiquer plus vite, identifier de nouveaux leviers de performance et construire des plans de transformation à ROI mesurable.</p>
+  <div class="quote">L’objectif n’est pas de devenir expert technique de l’IA. Il est de savoir <b>où, pourquoi et comment l’utiliser</b> pour résoudre une problématique business.</div>
+</section>
+
+<section class="section" id="contexte">
+  <div class="eyebrow">Le contexte</div>
+  <h2>Les entreprises veulent intégrer l’IA… <span class="accent">sans toujours savoir par où commencer.</span></h2>
+  <div class="grid cols3">
+    <div class="card"><div class="big-number">01</div><h3>Des enjeux immédiats</h3><p>Crise, restructuration, transformation, performance, remplacement temporaire d’un dirigeant.</p></div>
+    <div class="card"><div class="big-number">02</div><h3>Des managers expérimentés</h3><p>Une forte expertise métier, une capacité d’adaptation élevée et une obligation de résultat rapide.</p></div>
+    <div class="card"><div class="big-number">03</div><h3>Une nouvelle compétence</h3><p>Repérer les processus à augmenter, automatiser ou transformer grâce à l’IA.</p></div>
+  </div>
+</section>
+
+<section class="section" id="promesse">
+  <div class="eyebrow">La promesse</div>
+  <h2>Passer de l’usage ponctuel de l’IA à une <span class="accent">méthode de transformation.</span></h2>
+  <div class="grid cols4">
+    <div class="card"><h3>Se renforcer</h3><p>Utiliser l’IA comme copilote dans sa propre mission.</p></div>
+    <div class="card"><h3>Diagnostiquer</h3><p>Identifier les tâches, processus et décisions à optimiser.</p></div>
+    <div class="card"><h3>Prioriser</h3><p>Évaluer impact, faisabilité, risques et ROI.</p></div>
+    <div class="card"><h3>Convaincre</h3><p>Construire une roadmap et la défendre devant un dirigeant ou un CODIR.</p></div>
+  </div>
+</section>
+
+<section class="section" id="public">
+  <div class="eyebrow">Public</div>
+  <h2>Une formation conçue pour la <span class="accent">diversité des fonctions.</span></h2>
+  <div class="grid cols3">
+    <div class="card"><h3>Direction générale / COO</h3><p>Pilotage, restructuration, transformation, crise, performance.</p></div>
+    <div class="card"><h3>Finance / DAF</h3><p>Reporting, cash, contrôle, ERP, clôture, restructuration financière.</p></div>
+    <div class="card"><h3>Ressources Humaines</h3><p>Transformation RH, réorganisation, compétences, relations sociales.</p></div>
+    <div class="card"><h3>Industrie / Supply Chain</h3><p>Productivité, qualité, stocks, flux, achats, redressement de site.</p></div>
+    <div class="card"><h3>DSI / Transformation</h3><p>SI, data, IA, cybersécurité, ERP, organisation digitale.</p></div>
+    <div class="card"><h3>Commercial / Marketing</h3><p>Relance commerciale, acquisition, conversion, omnicanal, offre.</p></div>
+  </div>
+</section>
+
+<section class="section" id="programme">
+  <div class="eyebrow">Programme</div>
+  <h2>Un parcours en <span class="accent">8 modules</span>, du socle commun à la mise en situation.</h2>
+  <div class="timeline">
+    <div class="card"><h3>1. Comprendre</h3><p>IA générative, prédictive, RAG, automatisation, agents.</p></div>
+    <div class="card"><h3>2. S’augmenter</h3><p>Utiliser l’IA comme copilote de mission.</p></div>
+    <div class="card"><h3>3. Diagnostiquer</h3><p>Repérer les opportunités dans les processus.</p></div>
+    <div class="card"><h3>4. Appliquer</h3><p>Cas d’usage par métier.</p></div>
+    <div class="card"><h3>5. Automatiser</h3><p>Assistant, workflow, agent et multi-agents.</p></div>
+    <div class="card"><h3>6. Valoriser</h3><p>Business case, gains, ROI.</p></div>
+    <div class="card"><h3>7. Sécuriser</h3><p>Risques, gouvernance, adoption.</p></div>
+    <div class="card"><h3>8. Convaincre</h3><p>Challenge final et roadmap 30/60/90 jours.</p></div>
+  </div>
+</section>
+
+<section class="section" id="methode">
+  <div class="eyebrow">Méthode réutilisable</div>
+  <h2>Transformer un problème métier en <span class="accent">opportunité IA.</span></h2>
+  <div class="process">
+    <div class="step"><b>D — Détecter</b><span>Tâches répétitives, lentes, coûteuses ou sources de friction.</span></div><div class="arrow">→</div>
+    <div class="step"><b>I — Identifier</b><span>Données, documents, décisions, interactions et systèmes concernés.</span></div><div class="arrow">→</div>
+    <div class="step"><b>A — Analyser</b><span>Potentiel d’automatisation, gains, risques et faisabilité.</span></div><div class="arrow">→</div>
+    <div class="step"><b>G — Générer</b><span>Roadmap, priorisation et plan d’action.</span></div>
+  </div>
+  <p class="note">Une grille de diagnostic réutilisable dans chaque mission, quel que soit le secteur.</p>
+</section>
+
+<section class="section" id="cas">
+  <div class="eyebrow">Cas d’usage</div>
+  <h2>Explorer l’IA à travers <span class="accent">son propre métier.</span></h2>
+  <div class="tabs" id="tabs"></div>
+  <div class="tabpanel card" id="tabpanel"></div>
+</section>
+
+<section class="section" id="agents">
+  <div class="eyebrow">Niveaux d’automatisation</div>
+  <h2>Choisir le bon niveau de solution : <span class="accent">ni trop peu, ni trop complexe.</span></h2>
+  <div class="process">
+    <div class="step"><b>1. Assistant IA</b><span>Répond à une demande.</span></div>
+    <div class="step"><b>2. Copilote métier</b><span>Travaille avec le contexte métier.</span></div>
+    <div class="step"><b>3. Workflow</b><span>Exécute plusieurs tâches selon des règles.</span></div>
+    <div class="step"><b>4. Agent IA</b><span>Poursuit un objectif et utilise des outils.</span></div>
+    <div class="step"><b>5. Multi-agents</b><span>Plusieurs agents gèrent un processus complet.</span></div>
+  </div>
+</section>
+
+<section class="section" id="roi">
+  <div class="eyebrow">Créer de la valeur</div>
+  <h2>Transformer une idée IA en <span class="accent">décision d’investissement.</span></h2>
+  <div class="process">
+    <div class="step"><b>Coût actuel</b><span>Temps, ETP, erreurs, délais, volumes.</span></div><div class="arrow">→</div>
+    <div class="step"><b>Potentiel</b><span>Automatisation, capacité, qualité, vitesse.</span></div><div class="arrow">→</div>
+    <div class="step"><b>Investissement</b><span>Outils, intégration, conduite du changement.</span></div><div class="arrow">→</div>
+    <div class="step"><b>Impact</b><span>Économies, chiffre d’affaires, ROI, payback.</span></div>
+  </div>
+  <div class="metric-row">
+    <div class="metric"><strong>Temps</strong><span>Réduction des tâches à faible valeur</span></div>
+    <div class="metric"><strong>Capacité</strong><span>Plus d’activité avec les mêmes ressources</span></div>
+    <div class="metric"><strong>Qualité</strong><span>Moins d’erreurs et plus de fiabilité</span></div>
+    <div class="metric"><strong>Business</strong><span>Plus de ventes, de marge ou de réactivité</span></div>
+  </div>
+</section>
+
+<section class="section" id="gouvernance">
+  <div class="eyebrow">Sécuriser</div>
+  <h2>Automatiser lorsque cela crée de la valeur. <span class="accent">Garder l’humain lorsque le risque l’exige.</span></h2>
+  <div class="grid cols4">
+    <div class="card"><h3>Données</h3><p>Confidentialité, RGPD, données sensibles, droits d’accès.</p></div>
+    <div class="card"><h3>Fiabilité</h3><p>Hallucinations, contrôle humain, traçabilité, biais.</p></div>
+    <div class="card"><h3>Sécurité</h3><p>Cybersécurité, dépendance fournisseur, gouvernance.</p></div>
+    <div class="card"><h3>Adoption</h3><p>Conduite du changement, rôle des équipes, appropriation.</p></div>
+  </div>
+</section>
+
+<section class="section" id="challenge">
+  <div class="eyebrow">Mise en situation</div>
+  <h2><span class="accent">“Vous arrivez lundi.”</span><br>Le dirigeant vous donne 90 jours pour améliorer la performance.</h2>
+  <div class="grid cols3">
+    <div class="card"><h3>Diagnostiquer</h3><p>Comprendre la situation, les problèmes et les irritants majeurs.</p></div>
+    <div class="card"><h3>Prioriser</h3><p>Sélectionner les cas d’usage IA à fort impact et faisables rapidement.</p></div>
+    <div class="card"><h3>Convaincre</h3><p>Présenter une roadmap 30/60/90 jours avec gains, risques et ROI.</p></div>
+  </div>
+  <div class="quote">Restitution finale : 5 minutes devant un “CODIR” pour défendre la recommandation.</div>
+</section>
+
+<section class="section" id="pedagogie">
+  <div class="eyebrow">Une formation immédiatement applicable</div>
+  <h2>40 % de socle commun. <span class="accent">60 % d’application métier.</span></h2>
+  <div class="grid cols2">
+    <div class="card"><h3>Méthode pédagogique</h3><p>Démonstrations, cas réels, ateliers pratiques, travaux individuels et en groupe, business cases et simulations de présentation.</p></div>
+    <div class="card"><h3>Livrables participants</h3><p>Grille de diagnostic IA, méthode D.I.A.G., bibliothèque de cas d’usage, matrice de priorisation, trame ROI, checklist risques, roadmap 30/60/90 jours et modèles de prompts.</p></div>
+  </div>
+  <div class="quote"><b>Diagnostiquer plus vite. Transformer mieux. Créer davantage de valeur.</b></div>
+</section>
+</main>
+
+<a class="backtop" href="#top" aria-label="Retour en haut">↑</a>
+<footer class="footer">Manager de transition augmenté par l’IA</footer>
+
 <script>
-const slides=[...document.querySelectorAll('.slide')];const nav=document.getElementById('nav');const progress=document.getElementById('progress');const count=document.getElementById('count');let current=0;slides.forEach((s,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+s.dataset.title;b.onclick=()=>show(i);nav.appendChild(b)});const navBtns=[...nav.querySelectorAll('button')];function show(i){current=(i+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle('active',j===current));navBtns.forEach((b,j)=>b.classList.toggle('active',j===current));progress.style.width=((current+1)/slides.length*100)+'%';count.textContent=(current+1)+' / '+slides.length}document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))show(current+1);if(['ArrowLeft','PageUp'].includes(e.key))show(current-1)});show(0);
-const data={"DG / COO":["Consolidation de données multi-sources","Reporting automatisé et synthèses CODIR","Détection des écarts de performance","Scénarios stratégiques et suivi de plans d’action","Identification de signaux faibles","Automatisation du pilotage opérationnel"],"Finance / DAF":["Lecture et traitement automatisé des factures","Rapprochements facture / commande","Détection d’anomalies et contrôles","Prévisions de trésorerie","Analyse des écarts","Commentaires financiers et reporting automatisé"],"RH":["Cartographie des compétences","Matching profils / postes","Onboarding et assistants RH","Analyse documentaire RH","Workforce planning","Préparation des entretiens et communications"],"Industrie / Supply":["Prévision de la demande","Optimisation des stocks et des flux","Maintenance prédictive","Contrôle qualité automatisé","Détection d’anomalies","Analyse fournisseurs et reporting opérationnel"],"Commercial / Marketing":["Qualification et scoring des leads","Automatisation des relances","Préparation des rendez-vous","Génération de devis et propositions","Analyse des conversations commerciales","Prévisions de closing et mise à jour CRM"],"Service client":["Agents conversationnels","Qualification et priorisation des demandes","Routage automatique des tickets","Analyse des réclamations","Prédiction du churn","Synthèse de l’historique client"]};const tabs=document.getElementById('tabs');const panel=document.getElementById('tabpanel');Object.keys(data).forEach((k,i)=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>renderTab(k,b);tabs.appendChild(b);if(i===0)setTimeout(()=>renderTab(k,b),0)});function renderTab(k,b){[...tabs.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');panel.innerHTML='<h3>'+k+'</h3><div class="usecase-list">'+data[k].map(x=>'<div class="usecase">'+x+'</div>').join('')+'</div>'}
+const menuBtn=document.getElementById('menuBtn');
+const nav=document.getElementById('nav');
+menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open);menuBtn.textContent=open?'✕':'☰'});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));
+
+const sections=[...document.querySelectorAll('section[id]')];
+const links=[...nav.querySelectorAll('a')];
+const spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-35% 0px -55% 0px',threshold:0});
+sections.forEach(s=>spy.observe(s));
+
+const data={
+"DG / COO":["Consolidation de données multi-sources","Reporting automatisé et synthèses CODIR","Détection des écarts de performance","Scénarios stratégiques et suivi de plans d’action","Identification de signaux faibles","Automatisation du pilotage opérationnel"],
+"Finance / DAF":["Lecture et traitement automatisé des factures","Rapprochements facture / commande","Détection d’anomalies et contrôles","Prévisions de trésorerie","Analyse des écarts","Commentaires financiers et reporting automatisé"],
+"RH":["Cartographie des compétences","Matching profils / postes","Onboarding et assistants RH","Analyse documentaire RH","Workforce planning","Préparation des entretiens et communications"],
+"Industrie / Supply":["Prévision de la demande","Optimisation des stocks et des flux","Maintenance prédictive","Contrôle qualité automatisé","Détection d’anomalies","Analyse fournisseurs et reporting opérationnel"],
+"Commercial / Marketing":["Qualification et scoring des leads","Automatisation des relances","Préparation des rendez-vous","Génération de devis et propositions","Analyse des conversations commerciales","Prévisions de closing et mise à jour CRM"],
+"Service client":["Agents conversationnels","Qualification et priorisation des demandes","Routage automatique des tickets","Analyse des réclamations","Prédiction du churn","Synthèse de l’historique client"]};
+const tabs=document.getElementById('tabs'),panel=document.getElementById('tabpanel');
+Object.keys(data).forEach((k,i)=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>renderTab(k,b);tabs.appendChild(b);if(i===0)setTimeout(()=>renderTab(k,b),0)});
+function renderTab(k,b){[...tabs.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');panel.innerHTML='<h3>'+k+'</h3><div class="usecase-list">'+data[k].map(x=>'<div class="usecase">'+x+'</div>').join('')+'</div>'}
 </script>
-<!-- republished 2026-10-08 -->
 </body>
 </html>
