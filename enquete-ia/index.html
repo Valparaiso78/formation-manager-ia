@@ -168,7 +168,11 @@
           <div class="field"><label for="name">Prénom et nom <span class="req">*</span></label><input id="name" type="text" name="prenom-nom"></div>
           <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" type="email" name="email"></div>
         </div>
-        <div class="field"><label for="tel">Téléphone</label><input id="tel" type="tel" name="telephone"></div>
+        <div class="field">
+          <label for="tel">Téléphone <span class="req">*</span></label>
+          <div class="hint">10 chiffres, sans espaces (ex. 0612345678)</div>
+          <input id="tel" type="tel" name="telephone" inputmode="numeric" autocomplete="tel" pattern="[0-9]{10}" minlength="10" maxlength="10" placeholder="0612345678">
+        </div>
 
         <div class="field">
           <div class="legend">Quelles dates pourraient vous convenir ? <span class="req">*</span></div>
@@ -212,23 +216,40 @@
     const no = document.getElementById('noContact');
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
+    const telInput = document.getElementById('tel');
+    const contactInputs = [...contactBlock.querySelectorAll('input')];
     const dateChecks = [...document.querySelectorAll('input[name="dates[]"]')];
     const slotChecks = [...document.querySelectorAll('input[name="creneaux[]"]')];
 
     function toggleContact(){
       const show = yes.checked;
       contactBlock.classList.toggle('show', show);
+      contactInputs.forEach(el => el.disabled = !show);
       nameInput.required = show;
       emailInput.required = show;
+      telInput.required = show;
       if (!show) {
+        telInput.setCustomValidity('');
         dateChecks.forEach(x => x.required = false);
         slotChecks.forEach(x => x.required = false);
       }
     }
     [yes,no].forEach(el => el.addEventListener('change', toggleContact));
 
+    telInput.addEventListener('input', () => {
+      telInput.value = telInput.value.replace(/\D/g, '').slice(0, 10);
+      telInput.setCustomValidity(telInput.value.length === 10 ? '' : 'Merci de saisir exactement 10 chiffres.');
+    });
+
     document.querySelector('form').addEventListener('submit', (e) => {
       if (yes.checked) {
+        if (telInput.value.length !== 10) {
+          e.preventDefault();
+          telInput.setCustomValidity('Merci de saisir exactement 10 chiffres.');
+          telInput.reportValidity();
+          telInput.focus();
+          return;
+        }
         if (!dateChecks.some(x => x.checked)) {
           e.preventDefault();
           alert('Merci de sélectionner au moins une date possible.');
@@ -242,6 +263,8 @@
         }
       }
     });
+
+    toggleContact();
   </script>
 </body>
 </html>
