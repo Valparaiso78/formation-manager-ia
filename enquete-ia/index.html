@@ -6,7 +6,7 @@
   <title>IA & management de transition – vos usages et besoins</title>
   <meta name="description" content="Questionnaire sur les usages et besoins IA des managers de transition." />
   <style>
-    :root{--navy:#0b1f33;--blue:#1d5fd1;--sky:#eaf2ff;--ink:#122033;--muted:#667085;--line:#d9e2ec;--bg:#f6f8fb;--white:#fff;--ok:#0a7f5a}
+    :root{--navy:#0b1f33;--blue:#1d5fd1;--ink:#122033;--muted:#667085;--line:#d9e2ec;--bg:#f6f8fb}
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#eef4fb 0,#f8fafc 260px,#f8fafc 100%);color:var(--ink);line-height:1.5}
     .wrap{max-width:900px;margin:0 auto;padding:32px 18px 72px}
@@ -35,236 +35,103 @@
     .conditional.show{display:block}
     .submit-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px}
     button{border:0;border-radius:12px;background:var(--blue);color:#fff;padding:14px 22px;font:inherit;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(29,95,209,.24)}
-    button:hover{filter:brightness(.97)}
-    .privacy{font-size:.85rem;color:var(--muted);max-width:560px}
-    .req{color:#c0353a}
+    .privacy{font-size:.85rem;color:var(--muted);max-width:560px}.req{color:#c0353a}
     footer{text-align:center;color:var(--muted);font-size:.86rem;margin-top:18px}
     @media(max-width:680px){.hero{padding:28px 22px}.wrap{padding:18px 12px 48px}form{padding:20px 16px}.grid2{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="eyebrow">Questionnaire – 2 à 3 minutes</div>
-      <h1>IA & management de transition</h1>
-      <p>Je travaille actuellement sur la conception d’une formation dédiée aux managers de transition autour de l’utilisation de l’Intelligence Artificielle dans leurs missions. L’objectif est de mieux comprendre vos usages actuels, vos besoins, vos freins et les situations dans lesquelles l’IA pourrait vous être utile. Ce questionnaire ne s’inscrit dans aucune démarche commerciale.</p>
-      <div class="meta"><span class="pill">Réponses confidentielles</span><span class="pill">Approche non commerciale</span><span class="pill">Managers de transition</span></div>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Questionnaire – 2 à 3 minutes</div>
+    <h1>IA & management de transition</h1>
+    <p>Je travaille actuellement sur la conception d’une formation dédiée aux managers de transition autour de l’utilisation de l’Intelligence Artificielle dans leurs missions. L’objectif est de mieux comprendre vos usages actuels, vos besoins, vos freins et les situations dans lesquelles l’IA pourrait vous être utile. Ce questionnaire ne s’inscrit dans aucune démarche commerciale.</p>
+    <div class="meta"><span class="pill">Réponses confidentielles</span><span class="pill">Approche non commerciale</span><span class="pill">Managers de transition</span></div>
+  </section>
+
+  <form id="surveyForm" name="enquete-ia-managers-transition" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci">
+    <input type="hidden" name="form-name" value="enquete-ia-managers-transition" />
+    <p style="display:none"><label>Ne pas remplir : <input name="bot-field" /></label></p>
+
+    <div class="section-title"><h2>Votre profil et vos usages</h2><p>Ces questions nous permettent de mieux comprendre les réalités de vos missions.</p></div>
+
+    <div class="field"><div class="legend">1. Quelle est votre fonction principale en management de transition ? <span class="req">*</span></div><div class="options">
+      <label class="choice"><input required type="radio" name="fonction" value="Direction générale / COO">Direction générale / COO</label>
+      <label class="choice"><input type="radio" name="fonction" value="Finance / DAF">Finance / DAF</label>
+      <label class="choice"><input type="radio" name="fonction" value="Ressources Humaines">Ressources Humaines</label>
+      <label class="choice"><input type="radio" name="fonction" value="Industrie / Opérations / Supply Chain">Industrie / Opérations / Supply Chain</label>
+      <label class="choice"><input type="radio" name="fonction" value="DSI / Digital / Transformation">DSI / Digital / Transformation</label>
+      <label class="choice"><input type="radio" name="fonction" value="Commercial / Marketing">Commercial / Marketing</label>
+      <label class="choice"><input type="radio" name="fonction" value="Autre">Autre</label>
+    </div></div>
+
+    <div class="field"><div class="legend">2. Dans quels secteurs intervenez-vous principalement ? <span class="req">*</span></div><div class="options">
+      <label class="choice"><input type="checkbox" name="secteurs[]" value="Industrie">Industrie</label><label class="choice"><input type="checkbox" name="secteurs[]" value="Services">Services</label><label class="choice"><input type="checkbox" name="secteurs[]" value="Retail / Distribution">Retail / Distribution</label><label class="choice"><input type="checkbox" name="secteurs[]" value="Banque / Assurance">Banque / Assurance</label><label class="choice"><input type="checkbox" name="secteurs[]" value="Santé">Santé</label><label class="choice"><input type="checkbox" name="secteurs[]" value="Tech / Digital">Tech / Digital</label><label class="choice"><input type="checkbox" name="secteurs[]" value="B2B">B2B</label><label class="choice"><input type="checkbox" name="secteurs[]" value="Autre">Autre</label>
+    </div></div>
+
+    <div class="field"><div class="legend">3. Comment évalueriez-vous aujourd’hui votre niveau d’usage de l’IA ? <span class="req">*</span></div><div class="options">
+      <label class="choice"><input required type="radio" name="niveau-ia" value="Je ne l’utilise pas encore">Je ne l’utilise pas encore</label><label class="choice"><input type="radio" name="niveau-ia" value="Je teste ponctuellement">Je teste ponctuellement</label><label class="choice"><input type="radio" name="niveau-ia" value="Je l’utilise régulièrement">Je l’utilise régulièrement</label><label class="choice"><input type="radio" name="niveau-ia" value="Je l’utilise souvent dans mes missions">Je l’utilise souvent dans mes missions</label><label class="choice"><input type="radio" name="niveau-ia" value="Je maîtrise déjà plusieurs usages avancés">Je maîtrise déjà plusieurs usages avancés</label>
+    </div></div>
+
+    <div class="field"><div class="legend">4. Pour quels usages utilisez-vous déjà l’IA ? <span class="req">*</span></div><div class="options">
+      <label class="choice"><input type="checkbox" name="usages[]" value="Recherche / veille">Recherche / veille</label><label class="choice"><input type="checkbox" name="usages[]" value="Synthèse de documents">Synthèse de documents</label><label class="choice"><input type="checkbox" name="usages[]" value="Rédaction de contenus">Rédaction de contenus</label><label class="choice"><input type="checkbox" name="usages[]" value="Analyse de données">Analyse de données</label><label class="choice"><input type="checkbox" name="usages[]" value="Préparation de réunions / CODIR">Préparation de réunions / CODIR</label><label class="choice"><input type="checkbox" name="usages[]" value="Construction de plans d’action">Construction de plans d’action</label><label class="choice"><input type="checkbox" name="usages[]" value="Automatisation de tâches">Automatisation de tâches</label><label class="choice"><input type="checkbox" name="usages[]" value="Analyse de processus">Analyse de processus</label><label class="choice"><input type="checkbox" name="usages[]" value="Aide à la décision">Aide à la décision</label><label class="choice"><input type="checkbox" name="usages[]" value="Je ne l’utilise pas encore">Je ne l’utilise pas encore</label><label class="choice"><input type="checkbox" name="usages[]" value="Autre">Autre</label>
+    </div></div>
+
+    <div class="field"><label for="situations">5. Dans quelles situations l’IA pourrait-elle, selon vous, vous être la plus utile dans une mission de transition ?</label><textarea id="situations" name="situations-utiles" placeholder="Ex. diagnostic, analyse documentaire, automatisation de processus, préparation d’un CODIR, reporting…"></textarea></div>
+
+    <div class="field"><div class="legend">6. Quels sujets aimeriez-vous mieux maîtriser ? <span class="req">*</span></div><div class="options">
+      <label class="choice"><input type="checkbox" name="sujets[]" value="Utiliser l’IA comme copilote de mission">Utiliser l’IA comme copilote de mission</label><label class="choice"><input type="checkbox" name="sujets[]" value="Analyser plus rapidement une situation">Analyser plus rapidement une situation</label><label class="choice"><input type="checkbox" name="sujets[]" value="Identifier les processus à automatiser">Identifier les processus à automatiser</label><label class="choice"><input type="checkbox" name="sujets[]" value="Construire des cas d’usage IA par métier">Construire des cas d’usage IA par métier</label><label class="choice"><input type="checkbox" name="sujets[]" value="Utiliser des agents IA">Utiliser des agents IA</label><label class="choice"><input type="checkbox" name="sujets[]" value="Mesurer les gains et le ROI">Mesurer les gains et le ROI</label><label class="choice"><input type="checkbox" name="sujets[]" value="Construire une roadmap IA">Construire une roadmap IA</label><label class="choice"><input type="checkbox" name="sujets[]" value="Présenter des recommandations IA à une direction">Présenter des recommandations IA à une direction</label><label class="choice"><input type="checkbox" name="sujets[]" value="Sécuriser les usages : données, confidentialité, risques">Sécuriser les usages : données, confidentialité, risques</label><label class="choice"><input type="checkbox" name="sujets[]" value="Autre">Autre</label>
+    </div></div>
+
+    <div class="field"><div class="legend">7. Quels sont aujourd’hui vos principaux freins à l’utilisation de l’IA ? <span class="req">*</span></div><div class="options">
+      <label class="choice"><input type="checkbox" name="freins[]" value="Je ne sais pas par où commencer">Je ne sais pas par où commencer</label><label class="choice"><input type="checkbox" name="freins[]" value="Manque de temps">Manque de temps</label><label class="choice"><input type="checkbox" name="freins[]" value="Manque de connaissances">Manque de connaissances</label><label class="choice"><input type="checkbox" name="freins[]" value="Difficulté à identifier les bons cas d’usage">Difficulté à identifier les bons cas d’usage</label><label class="choice"><input type="checkbox" name="freins[]" value="Confidentialité / sécurité des données">Confidentialité / sécurité des données</label><label class="choice"><input type="checkbox" name="freins[]" value="Fiabilité des réponses">Fiabilité des réponses</label><label class="choice"><input type="checkbox" name="freins[]" value="Difficulté à intégrer l’IA aux outils de l’entreprise">Difficulté à intégrer l’IA aux outils de l’entreprise</label><label class="choice"><input type="checkbox" name="freins[]" value="Résistance des équipes / conduite du changement">Résistance des équipes / conduite du changement</label><label class="choice"><input type="checkbox" name="freins[]" value="Je n’identifie pas encore de besoin réel">Je n’identifie pas encore de besoin réel</label><label class="choice"><input type="checkbox" name="freins[]" value="Autre">Autre</label>
+    </div></div>
+
+    <div class="field"><label for="apport">8. Si une formation IA pour managers de transition devait absolument vous apporter une chose, laquelle serait-ce ?</label><textarea id="apport" name="apport-essentiel" placeholder="Votre réponse"></textarea></div>
+
+    <div class="field"><div class="legend">9. Accepteriez-vous un échange de 10 à 15 minutes pour approfondir vos réponses ? <span class="req">*</span></div><div class="options"><label class="choice"><input required type="radio" name="accepte-echange" value="Oui" id="yesContact">Oui</label><label class="choice"><input type="radio" name="accepte-echange" value="Non" id="noContact">Non</label></div></div>
+
+    <section id="contactBlock" class="conditional" aria-live="polite">
+      <div class="section-title"><h2>Vos coordonnées et disponibilités</h2><p>À compléter uniquement si vous avez accepté un échange de 10 à 15 minutes.</p></div>
+      <div class="grid2"><div class="field"><label for="name">Prénom et nom <span class="req">*</span></label><input id="name" type="text" name="prenom-nom"></div><div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" type="email" name="email"></div></div>
+      <div class="field"><label for="tel">Téléphone <span class="req">*</span></label><input id="tel" type="tel" name="telephone" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="0612345678"><div class="hint">10 chiffres, sans espaces.</div></div>
+      <div class="field"><div class="legend">Quelles dates pourraient vous convenir ? <span class="req">*</span></div><div class="options"><label class="choice"><input type="checkbox" name="dates[]" value="Lundi 12 octobre 2026">Lundi 12 octobre 2026</label><label class="choice"><input type="checkbox" name="dates[]" value="Mardi 13 octobre 2026">Mardi 13 octobre 2026</label><label class="choice"><input type="checkbox" name="dates[]" value="Mercredi 14 octobre 2026">Mercredi 14 octobre 2026</label><label class="choice"><input type="checkbox" name="dates[]" value="Jeudi 15 octobre 2026">Jeudi 15 octobre 2026</label><label class="choice"><input type="checkbox" name="dates[]" value="Vendredi 16 octobre 2026">Vendredi 16 octobre 2026</label><label class="choice"><input type="checkbox" name="dates[]" value="Autre date">Autre date</label></div></div>
+      <div class="field"><div class="legend">Sur quels créneaux de 2 heures êtes-vous généralement disponible ? <span class="req">*</span></div><div class="options"><label class="choice"><input type="checkbox" name="creneaux[]" value="8h00 – 10h00">8h00 – 10h00</label><label class="choice"><input type="checkbox" name="creneaux[]" value="10h00 – 12h00">10h00 – 12h00</label><label class="choice"><input type="checkbox" name="creneaux[]" value="12h00 – 14h00">12h00 – 14h00</label><label class="choice"><input type="checkbox" name="creneaux[]" value="14h00 – 16h00">14h00 – 16h00</label><label class="choice"><input type="checkbox" name="creneaux[]" value="16h00 – 18h00">16h00 – 18h00</label><label class="choice"><input type="checkbox" name="creneaux[]" value="18h00 – 20h00">18h00 – 20h00</label><label class="choice"><input type="checkbox" name="creneaux[]" value="Autre créneau">Autre créneau</label></div></div>
+      <div class="field"><label for="pref">Y a-t-il un moment à privilégier ou à éviter ?</label><input id="pref" type="text" name="moment-a-privilegier-ou-eviter" placeholder="Ex. éviter le mardi matin"></div>
     </section>
 
-    <form name="enquete-ia-managers-transition" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/enquete-ia/merci.html">
-      <input type="hidden" name="form-name" value="enquete-ia-managers-transition" />
-      <p style="display:none"><label>Ne pas remplir : <input name="bot-field" /></label></p>
-
-      <div class="section-title"><h2>Votre profil et vos usages</h2><p>Ces questions nous permettent de mieux comprendre les réalités de vos missions.</p></div>
-
-      <div class="field">
-        <div class="legend">1. Quelle est votre fonction principale en management de transition ? <span class="req">*</span></div>
-        <div class="options">
-          <label class="choice"><input required type="radio" name="fonction" value="Direction générale / COO">Direction générale / COO</label>
-          <label class="choice"><input type="radio" name="fonction" value="Finance / DAF">Finance / DAF</label>
-          <label class="choice"><input type="radio" name="fonction" value="Ressources Humaines">Ressources Humaines</label>
-          <label class="choice"><input type="radio" name="fonction" value="Industrie / Opérations / Supply Chain">Industrie / Opérations / Supply Chain</label>
-          <label class="choice"><input type="radio" name="fonction" value="DSI / Digital / Transformation">DSI / Digital / Transformation</label>
-          <label class="choice"><input type="radio" name="fonction" value="Commercial / Marketing">Commercial / Marketing</label>
-          <label class="choice"><input type="radio" name="fonction" value="Autre">Autre</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="legend">2. Dans quels secteurs intervenez-vous principalement ? <span class="req">*</span></div>
-        <div class="options">
-          <label class="choice"><input required type="checkbox" name="secteurs[]" value="Industrie">Industrie</label>
-          <label class="choice"><input type="checkbox" name="secteurs[]" value="Services">Services</label>
-          <label class="choice"><input type="checkbox" name="secteurs[]" value="Retail / Distribution">Retail / Distribution</label>
-          <label class="choice"><input type="checkbox" name="secteurs[]" value="Banque / Assurance">Banque / Assurance</label>
-          <label class="choice"><input type="checkbox" name="secteurs[]" value="Santé">Santé</label>
-          <label class="choice"><input type="checkbox" name="secteurs[]" value="Tech / Digital">Tech / Digital</label>
-          <label class="choice"><input type="checkbox" name="secteurs[]" value="B2B">B2B</label>
-          <label class="choice"><input type="checkbox" name="secteurs[]" value="Autre">Autre</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="legend">3. Comment évalueriez-vous aujourd’hui votre niveau d’usage de l’IA ? <span class="req">*</span></div>
-        <div class="options">
-          <label class="choice"><input required type="radio" name="niveau-ia" value="Je ne l’utilise pas encore">Je ne l’utilise pas encore</label>
-          <label class="choice"><input type="radio" name="niveau-ia" value="Je teste ponctuellement">Je teste ponctuellement</label>
-          <label class="choice"><input type="radio" name="niveau-ia" value="Je l’utilise régulièrement">Je l’utilise régulièrement</label>
-          <label class="choice"><input type="radio" name="niveau-ia" value="Je l’utilise souvent dans mes missions">Je l’utilise souvent dans mes missions</label>
-          <label class="choice"><input type="radio" name="niveau-ia" value="Je maîtrise déjà plusieurs usages avancés">Je maîtrise déjà plusieurs usages avancés</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="legend">4. Pour quels usages utilisez-vous déjà l’IA ? <span class="req">*</span></div>
-        <div class="options">
-          <label class="choice"><input required type="checkbox" name="usages[]" value="Recherche / veille">Recherche / veille</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Synthèse de documents">Synthèse de documents</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Rédaction de contenus">Rédaction de contenus</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Analyse de données">Analyse de données</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Préparation de réunions / CODIR">Préparation de réunions / CODIR</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Construction de plans d’action">Construction de plans d’action</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Automatisation de tâches">Automatisation de tâches</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Analyse de processus">Analyse de processus</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Aide à la décision">Aide à la décision</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Je ne l’utilise pas encore">Je ne l’utilise pas encore</label>
-          <label class="choice"><input type="checkbox" name="usages[]" value="Autre">Autre</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="situations">5. Dans quelles situations l’IA pourrait-elle, selon vous, vous être la plus utile dans une mission de transition ?</label>
-        <textarea id="situations" name="situations-utiles" placeholder="Ex. diagnostic, analyse documentaire, automatisation de processus, préparation d’un CODIR, reporting…"></textarea>
-      </div>
-
-      <div class="field">
-        <div class="legend">6. Quels sujets aimeriez-vous mieux maîtriser ? <span class="req">*</span></div>
-        <div class="options">
-          <label class="choice"><input required type="checkbox" name="sujets[]" value="Utiliser l’IA comme copilote de mission">Utiliser l’IA comme copilote de mission</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Analyser plus rapidement une situation">Analyser plus rapidement une situation</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Identifier les processus à automatiser">Identifier les processus à automatiser</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Construire des cas d’usage IA par métier">Construire des cas d’usage IA par métier</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Utiliser des agents IA">Utiliser des agents IA</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Mesurer les gains et le ROI">Mesurer les gains et le ROI</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Construire une roadmap IA">Construire une roadmap IA</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Présenter des recommandations IA à une direction">Présenter des recommandations IA à une direction</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Sécuriser les usages : données, confidentialité, risques">Sécuriser les usages : données, confidentialité, risques</label>
-          <label class="choice"><input type="checkbox" name="sujets[]" value="Autre">Autre</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="legend">7. Quels sont aujourd’hui vos principaux freins à l’utilisation de l’IA ? <span class="req">*</span></div>
-        <div class="options">
-          <label class="choice"><input required type="checkbox" name="freins[]" value="Je ne sais pas par où commencer">Je ne sais pas par où commencer</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Manque de temps">Manque de temps</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Manque de connaissances">Manque de connaissances</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Difficulté à identifier les bons cas d’usage">Difficulté à identifier les bons cas d’usage</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Confidentialité / sécurité des données">Confidentialité / sécurité des données</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Fiabilité des réponses">Fiabilité des réponses</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Difficulté à intégrer l’IA aux outils de l’entreprise">Difficulté à intégrer l’IA aux outils de l’entreprise</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Résistance des équipes / conduite du changement">Résistance des équipes / conduite du changement</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Je n’identifie pas encore de besoin réel">Je n’identifie pas encore de besoin réel</label>
-          <label class="choice"><input type="checkbox" name="freins[]" value="Autre">Autre</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="apport">8. Si une formation IA pour managers de transition devait absolument vous apporter une chose, laquelle serait-ce ?</label>
-        <textarea id="apport" name="apport-essentiel" placeholder="Votre réponse"></textarea>
-      </div>
-
-      <div class="field">
-        <div class="legend">9. Accepteriez-vous un échange de 10 à 15 minutes pour approfondir vos réponses ? <span class="req">*</span></div>
-        <div class="options">
-          <label class="choice"><input required type="radio" name="accepte-echange" value="Oui" id="yesContact">Oui</label>
-          <label class="choice"><input type="radio" name="accepte-echange" value="Non" id="noContact">Non</label>
-        </div>
-      </div>
-
-      <section id="contactBlock" class="conditional" aria-live="polite">
-        <div class="section-title"><h2>Vos coordonnées et disponibilités</h2><p>À compléter uniquement si vous avez accepté un échange de 10 à 15 minutes.</p></div>
-        <div class="grid2">
-          <div class="field"><label for="name">Prénom et nom <span class="req">*</span></label><input id="name" type="text" name="prenom-nom"></div>
-          <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" type="email" name="email"></div>
-        </div>
-        <div class="field">
-          <label for="tel">Téléphone <span class="req">*</span></label>
-          <div class="hint">10 chiffres, sans espaces (ex. 0612345678)</div>
-          <input id="tel" type="tel" name="telephone" inputmode="numeric" autocomplete="tel" pattern="[0-9]{10}" minlength="10" maxlength="10" placeholder="0612345678">
-        </div>
-
-        <div class="field">
-          <div class="legend">Quelles dates pourraient vous convenir ? <span class="req">*</span></div>
-          <div class="options">
-            <label class="choice"><input type="checkbox" name="dates[]" value="Lundi 12 octobre 2026">Lundi 12 octobre 2026</label>
-            <label class="choice"><input type="checkbox" name="dates[]" value="Mardi 13 octobre 2026">Mardi 13 octobre 2026</label>
-            <label class="choice"><input type="checkbox" name="dates[]" value="Mercredi 14 octobre 2026">Mercredi 14 octobre 2026</label>
-            <label class="choice"><input type="checkbox" name="dates[]" value="Jeudi 15 octobre 2026">Jeudi 15 octobre 2026</label>
-            <label class="choice"><input type="checkbox" name="dates[]" value="Vendredi 16 octobre 2026">Vendredi 16 octobre 2026</label>
-            <label class="choice"><input type="checkbox" name="dates[]" value="Autre date">Autre date</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="legend">Sur quels créneaux de 2 heures êtes-vous généralement disponible ? <span class="req">*</span></div>
-          <div class="options">
-            <label class="choice"><input type="checkbox" name="creneaux[]" value="8h00 – 10h00">8h00 – 10h00</label>
-            <label class="choice"><input type="checkbox" name="creneaux[]" value="10h00 – 12h00">10h00 – 12h00</label>
-            <label class="choice"><input type="checkbox" name="creneaux[]" value="12h00 – 14h00">12h00 – 14h00</label>
-            <label class="choice"><input type="checkbox" name="creneaux[]" value="14h00 – 16h00">14h00 – 16h00</label>
-            <label class="choice"><input type="checkbox" name="creneaux[]" value="16h00 – 18h00">16h00 – 18h00</label>
-            <label class="choice"><input type="checkbox" name="creneaux[]" value="18h00 – 20h00">18h00 – 20h00</label>
-            <label class="choice"><input type="checkbox" name="creneaux[]" value="Autre créneau">Autre créneau</label>
-          </div>
-        </div>
-
-        <div class="field"><label for="pref">Y a-t-il un moment à privilégier ou à éviter ?</label><input id="pref" type="text" name="moment-a-privilegier-ou-eviter" placeholder="Ex. éviter le mardi matin"></div>
-      </section>
-
-      <div class="submit-row">
-        <button type="submit">Partager mon retour</button>
-        <div class="privacy">Les coordonnées sont utilisées uniquement pour organiser un éventuel échange lié à cette étude. Aucune démarche commerciale.</div>
-      </div>
-    </form>
-    <footer>Merci pour votre contribution à la conception d’une formation IA réellement adaptée aux managers de transition.</footer>
-  </main>
-
-  <script>
-    const contactBlock = document.getElementById('contactBlock');
-    const yes = document.getElementById('yesContact');
-    const no = document.getElementById('noContact');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const telInput = document.getElementById('tel');
-    const contactInputs = [...contactBlock.querySelectorAll('input')];
-    const dateChecks = [...document.querySelectorAll('input[name="dates[]"]')];
-    const slotChecks = [...document.querySelectorAll('input[name="creneaux[]"]')];
-
-    function toggleContact(){
-      const show = yes.checked;
-      contactBlock.classList.toggle('show', show);
-      contactInputs.forEach(el => el.disabled = !show);
-      nameInput.required = show;
-      emailInput.required = show;
-      telInput.required = show;
-      if (!show) {
-        telInput.setCustomValidity('');
-        dateChecks.forEach(x => x.required = false);
-        slotChecks.forEach(x => x.required = false);
-      }
-    }
-    [yes,no].forEach(el => el.addEventListener('change', toggleContact));
-
-    telInput.addEventListener('input', () => {
-      telInput.value = telInput.value.replace(/\D/g, '').slice(0, 10);
-      telInput.setCustomValidity(telInput.value.length === 10 ? '' : 'Merci de saisir exactement 10 chiffres.');
-    });
-
-    document.querySelector('form').addEventListener('submit', (e) => {
-      if (yes.checked) {
-        if (telInput.value.length !== 10) {
-          e.preventDefault();
-          telInput.setCustomValidity('Merci de saisir exactement 10 chiffres.');
-          telInput.reportValidity();
-          telInput.focus();
-          return;
-        }
-        if (!dateChecks.some(x => x.checked)) {
-          e.preventDefault();
-          alert('Merci de sélectionner au moins une date possible.');
-          dateChecks[0].focus();
-          return;
-        }
-        if (!slotChecks.some(x => x.checked)) {
-          e.preventDefault();
-          alert('Merci de sélectionner au moins un créneau de disponibilité.');
-          slotChecks[0].focus();
-        }
-      }
-    });
-
-    toggleContact();
-  </script>
+    <div class="submit-row"><button type="submit">Partager mon retour</button><div class="privacy">Les coordonnées sont utilisées uniquement pour organiser un éventuel échange lié à cette étude. Aucune démarche commerciale.</div></div>
+  </form>
+  <footer>Merci pour votre contribution à la conception d’une formation IA réellement adaptée aux managers de transition.</footer>
+</main>
+<script>
+const form=document.getElementById('surveyForm');
+const contactBlock=document.getElementById('contactBlock');
+const yes=document.getElementById('yesContact');
+const no=document.getElementById('noContact');
+const nameInput=document.getElementById('name');
+const emailInput=document.getElementById('email');
+const telInput=document.getElementById('tel');
+const groups=[
+  {name:'secteurs[]',message:'Merci de sélectionner au moins un secteur.'},
+  {name:'usages[]',message:'Merci de sélectionner au moins un usage.'},
+  {name:'sujets[]',message:'Merci de sélectionner au moins un sujet.'},
+  {name:'freins[]',message:'Merci de sélectionner au moins un frein.'}
+];
+const dateChecks=[...document.querySelectorAll('input[name="dates[]"]')];
+const slotChecks=[...document.querySelectorAll('input[name="creneaux[]"]')];
+function toggleContact(){const show=yes.checked;contactBlock.classList.toggle('show',show);nameInput.required=show;emailInput.required=show;telInput.required=show;}
+[yes,no].forEach(el=>el.addEventListener('change',toggleContact));
+telInput.addEventListener('input',()=>{telInput.value=telInput.value.replace(/\D/g,'').slice(0,10);});
+form.addEventListener('submit',(e)=>{
+  for(const g of groups){const boxes=[...document.querySelectorAll(`input[name="${g.name}"]`)];if(!boxes.some(x=>x.checked)){e.preventDefault();alert(g.message);boxes[0].focus();return;}}
+  if(yes.checked){
+    if(!/^\d{10}$/.test(telInput.value)){e.preventDefault();alert('Merci de saisir un numéro de téléphone composé exactement de 10 chiffres.');telInput.focus();return;}
+    if(!dateChecks.some(x=>x.checked)){e.preventDefault();alert('Merci de sélectionner au moins une date possible.');dateChecks[0].focus();return;}
+    if(!slotChecks.some(x=>x.checked)){e.preventDefault();alert('Merci de sélectionner au moins un créneau de disponibilité.');slotChecks[0].focus();return;}
+  }
+});
+toggleContact();
+</script>
 </body>
 </html>
